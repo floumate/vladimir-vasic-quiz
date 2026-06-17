@@ -23,7 +23,8 @@ export const ZONES = [
     max: 100,
     name: 'Zdrava osnova',
     color: 'var(--zone-green)',
-    reading: 'Firma stoji solidno. Pitanje je samo da li je sledeća etapa rasta.',
+    reading:
+      'Vaša firma je u zdravoj osnovi. Razgovor ima smisla samo ako pomišljate na sledeću etapu.',
   },
   {
     id: 'yellow',

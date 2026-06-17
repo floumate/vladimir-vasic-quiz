@@ -10,15 +10,21 @@ permissions:
   pages: write
   id-token: write
 
+# Jedan deploy u datom trenutku; ne prekidaj deploy koji je u toku
 concurrency:
   group: pages
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      # Programski uključi Pages i postavi izvor na "GitHub Actions"
+      # (gasi ugrađeni "Deploy from a branch" koji je servirao sirov /src i pravio beli ekran)
+      - uses: actions/configure-pages@v5
+        with:
+          enablement: true
       - uses: actions/setup-node@v4
         with:
           node-version: 20
