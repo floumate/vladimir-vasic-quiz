@@ -23,8 +23,7 @@ export const ZONES = [
     max: 100,
     name: 'Zdrava osnova',
     color: 'var(--zone-green)',
-    reading:
-      'Firma stoji solidno. Brojevi rade za vas, ne protiv vas. Pitanje više nije „kako preživeti" - nego da li je sledeća etapa rasta.',
+    reading: 'Firma stoji solidno. Pitanje je samo da li je sledeća etapa rasta.',
   },
   {
     id: 'yellow',
@@ -33,7 +32,7 @@ export const ZONES = [
     name: 'Sivo polje',
     color: 'var(--zone-yellow)',
     reading:
-      'Firma funkcioniše, ali na osećaj. Tu se gubi novac koji se ne primećuje dok ne nastane problem. Ima prostora da se ovo zategne i pretvori u kontrolu.',
+      'Firma funkcioniše, ali na osećaj. Tu se gubi novac koji se ne primećuje dok ne nastane problem.',
   },
   {
     id: 'orange',
@@ -42,7 +41,7 @@ export const ZONES = [
     name: 'Visok rizik',
     color: 'var(--zone-orange)',
     reading:
-      'Više stvari ne radi kako treba - ali većina se može popraviti pre nego što postanu kriza. Sada je pravi trenutak da se uđe u njih, dok su još rešive.',
+      'Više stvari ne radi - većina se može popraviti pre nego što postanu kriza.',
   },
   {
     id: 'red',
@@ -50,8 +49,7 @@ export const ZONES = [
     max: 39,
     name: 'Kritična zona',
     color: 'var(--zone-red)',
-    reading:
-      'Svaki nepredviđeni trošak trenutno može da obori firmu. Hitno je - ali rešivo. Najvažnije je da krenete od pravog mesta, a ne da gasite svaki požar posebno.',
+    reading: 'Svaki nepredviđeni trošak može da obori firmu. Hitno, ali rešivo.',
   },
 ]
 
@@ -95,28 +93,21 @@ export const MAX_PROBLEMS = 4
  * Uslovi se evaluiraju po prioritetu ODOZGO - vraća se PRVA koja matchuje.
  * Ako nijedna ne matchuje, prikazuje se samo zone-tekst (vidi scoring.js).
  *
- * VAŽNO (rekonstrukcija): tabela 5.2 u PDF-u se delom izgubila pri konverziji.
- * Mapiranje uslov→rečenica ispod je rekonstruisano po smislu i čeka potvrdu.
- * `s` su sirovi bodovi po pitanju: { q1..q6 } (0–3 svaki).
+ * Redosled i copy su 1:1 sa tabelom 5.2 iz dokumenta.
+ * `s` su sirovi bodovi po pitanju: { q1..q6 } (0-3 svaki).
  */
 export const PERSONALIZATION_RULES = [
-  {
-    id: 'cash_and_bank',
-    test: (s) => s.q1 <= 1 && s.q4 <= 1,
-    sentence:
-      'Imate dva problema koja se gledaju kao jedan: nemate dovoljno keša i nemate kome da se obratite kada zatreba. To se rešava redom, ne odjednom.',
-  },
   {
     id: 'cash_timing',
     test: (s) => s.q1 <= 1 && s.q5 <= 1,
     sentence:
-      'Vaš glavni problem nije prihod - to je tajming novca. Novac ulazi sporo, a izlazi brzo.',
+      'Vaš glavni problem nije prihod - to je tajming novca. Novac ulazi sporo, izlazi brzo.',
   },
   {
     id: 'awareness',
     test: (s) => s.q2 <= 1 && s.q6 <= 1,
     sentence:
-      'Ne vodite firmu - firma vodi vas. Brojevi vam stižu sa zakašnjenjem, pa odluke donosite naslepo.',
+      'Ne vodite firmu - firma vodi vas. Brojevi vam stižu sa zakašnjenjem, odluke donosite naslepo.',
   },
   {
     id: 'maturity',
@@ -129,6 +120,12 @@ export const PERSONALIZATION_RULES = [
     test: (s) => s.q4 <= 1,
     sentence:
       'Banka vas trenutno ne vidi kao klijenta kome bi dala kredit. To je sistemski problem, ne lični.',
+  },
+  {
+    id: 'cash_and_bank',
+    test: (s) => s.q1 <= 1 && s.q4 <= 1,
+    sentence:
+      'Imate dva problema koja se gledaju kao jedan: nemate dovoljno keša i nemate kome da se obratite.',
   },
   {
     id: 'healthy',

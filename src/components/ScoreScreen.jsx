@@ -15,7 +15,7 @@ export default function ScoreScreen({ result, onRequestHelp }) {
     <div className="card fade-in score-screen">
       {/* A - Score krug + naziv zone */}
       <div className="score-screen__top">
-        <span className="eyebrow">Vaš rezultat</span>
+        <h2 className="score-screen__title">Vaš rezultat</h2>
         <ScoreCircle score={score100} zone={zone} />
         <h2 className="score-screen__zone" style={{ color: zone.color }}>
           {zone.name}

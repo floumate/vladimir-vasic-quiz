@@ -25,6 +25,7 @@ export default function PhoneField({
   country,
   onCountryChange,
   error,
+  onBlur,
 }) {
   const countries = useMemo(() => buildCountries(), [])
   const [open, setOpen] = useState(false)
@@ -139,6 +140,7 @@ export default function PhoneField({
           placeholder={placeholder}
           value={value}
           onChange={handleInput}
+          onBlur={onBlur}
         />
 
         {open && (

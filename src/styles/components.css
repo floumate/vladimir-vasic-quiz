@@ -132,6 +132,14 @@
   align-items: center;
   text-align: center;
 }
+.score-screen__title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.7rem;
+  letter-spacing: -0.02em;
+  color: var(--petrol);
+  margin-bottom: 4px;
+}
 .score-circle {
   position: relative;
   width: 200px;

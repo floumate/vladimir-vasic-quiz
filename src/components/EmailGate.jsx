@@ -5,27 +5,30 @@ import { isValidEmail, isValidName } from '../lib/validation'
 /*
  * Email gate (Sekcija 2, korak 3): ime + email. Back je u header-u.
  * Validacija: ime = reč + razmak + reč; email = stroga validacija.
+ * Greška se prikazuje čim korisnik napusti polje (blur), a nestaje čim
+ * unese ispravnu vrednost.
  */
 export default function EmailGate({ initial, onSubmit }) {
   const [name, setName] = useState(initial?.name || '')
   const [email, setEmail] = useState(initial?.email || '')
-  const [touched, setTouched] = useState(false)
+  const [touched, setTouched] = useState({ name: false, email: false })
 
   const nameOk = isValidName(name)
   const emailOk = isValidEmail(email.trim())
   const valid = nameOk && emailOk
 
+  const touch = (f) => setTouched((t) => ({ ...t, [f]: true }))
+
   function handleSubmit(e) {
     e.preventDefault()
-    setTouched(true)
+    setTouched({ name: true, email: true })
     if (!valid) return
     onSubmit({ name: name.trim().replace(/\s+/g, ' '), email: email.trim() })
   }
 
   return (
     <form className="card fade-in" onSubmit={handleSubmit} noValidate>
-      <span className="eyebrow">{EMAIL_GATE.eyebrow}</span>
-      <h2 className="mt-8">{EMAIL_GATE.title}</h2>
+      <h2>{EMAIL_GATE.title}</h2>
       <p className="mt-8" style={{ color: 'rgba(21,32,30,0.7)' }}>
         {EMAIL_GATE.subtitle}
       </p>
@@ -41,10 +44,11 @@ export default function EmailGate({ initial, onSubmit }) {
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
+            onBlur={() => touch('name')}
             placeholder="Ime i prezime"
             autoComplete="name"
           />
-          {touched && !nameOk && (
+          {touched.name && !nameOk && (
             <span className="field__error">Unesite i ime i prezime.</span>
           )}
         </div>
@@ -59,10 +63,11 @@ export default function EmailGate({ initial, onSubmit }) {
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            onBlur={() => touch('email')}
             placeholder="vas@email.com"
             autoComplete="email"
           />
-          {touched && !emailOk && (
+          {touched.email && !emailOk && (
             <span className="field__error">Email adresa nije validna.</span>
           )}
         </div>

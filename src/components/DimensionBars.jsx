@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { colorForPercent } from '../lib/colors'
 
 /*
  * Blok B - 4 trake po dimenziji. Boja je progresivna: gradijent crvena->zelena
@@ -19,7 +20,9 @@ export default function DimensionBars({ dimensions }) {
         <div className="bar" key={d.key}>
           <div className="bar__head">
             <span className="bar__label">{d.label}</span>
-            <span className="bar__pct">{d.percent}%</span>
+            <span className="bar__pct" style={{ color: colorForPercent(d.percent) }}>
+              {d.percent}%
+            </span>
           </div>
           <div className="bar__track">
             <div className="bar__gradient" />

@@ -31,15 +31,25 @@ export function isValidName(name) {
   return re.test(t)
 }
 
-/* Telefon: validan za izabranu državu (libphonenumber). Fallback: bar 6 cifara. */
+/*
+ * Telefon: mora biti VALIDAN MOBILNI broj za izabranu državu.
+ * Tražimo tip MOBILE (ili FIXED_LINE_OR_MOBILE) jer je polje Telefon/WhatsApp -
+ * tako npr. „1231231" za Srbiju (fiksni/nevalidan obrazac) pada, a 6x mobilni prolazi.
+ * Fallback (ako CDN ne učita): bar 8 cifara.
+ */
 export function isValidPhone(input, selectedCountry) {
   const v = (input || '').trim()
   if (!v) return false
   const lpn = window.libphonenumber
-  if (!lpn) return v.replace(/\D/g, '').length >= 6
+  if (!lpn) return v.replace(/\D/g, '').length >= 8
   try {
     const full = v.startsWith('+') ? v : (selectedCountry?.d || '') + ' ' + v
-    return lpn.isValidPhoneNumber(full)
+    const parsed = lpn.parsePhoneNumberFromString(full)
+    if (!parsed || !parsed.isValid()) return false
+    const type = parsed.getType ? parsed.getType() : undefined
+    // Ako metapodaci daju tip, dozvoli samo mobilne; ako tip nije poznat, padni nazad na isValid
+    if (type === undefined) return true
+    return type === 'MOBILE' || type === 'FIXED_LINE_OR_MOBILE'
   } catch (e) {
     return false
   }

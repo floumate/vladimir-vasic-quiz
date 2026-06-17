@@ -5,27 +5,29 @@ import { isValidEmail, isValidName, isValidPhone } from '../lib/validation'
 /*
  * Gate 2 - korak 1/2: Ime i prezime, Email, Telefon / WhatsApp.
  * Validacija: ime (reč+razmak+reč), email (strogo), telefon (po državi).
+ * Greška se prikazuje na blur i nestaje čim vrednost postane ispravna.
  * Back je u header-u (vodi na score ekran).
  */
 export default function Gate2Step1({ values, country, onCountryChange, onChange, onNext }) {
-  const [touched, setTouched] = useState(false)
+  const [touched, setTouched] = useState({ name: false, email: false, phone: false })
 
   const nameOk = isValidName(values.name)
   const emailOk = isValidEmail(values.email.trim())
   const phoneOk = isValidPhone(values.phone, country)
   const valid = nameOk && emailOk && phoneOk
 
+  const touch = (f) => setTouched((t) => ({ ...t, [f]: true }))
+
   function handleSubmit(e) {
     e.preventDefault()
-    setTouched(true)
+    setTouched({ name: true, email: true, phone: true })
     if (!valid) return
     onNext()
   }
 
   return (
     <form className="card fade-in" onSubmit={handleSubmit} noValidate>
-      <span className="eyebrow">Besplatna pomoć · korak 1/2</span>
-      <h2 className="mt-8">Ostavite osnovne podatke</h2>
+      <h2>Ostavite osnovne podatke</h2>
       <p className="mt-8" style={{ color: 'rgba(21,32,30,0.7)' }}>
         Pripremiću vašu firmu profesionalno i javljam se sa konkretnim sledećim
         korakom. Bez obaveza, bez cene.
@@ -40,10 +42,11 @@ export default function Gate2Step1({ values, country, onCountryChange, onChange,
             className="input"
             value={values.name}
             onChange={(e) => onChange('name', e.target.value)}
+            onBlur={() => touch('name')}
             autoComplete="name"
             placeholder="Ime i prezime"
           />
-          {touched && !nameOk && (
+          {touched.name && !nameOk && (
             <span className="field__error">Unesite i ime i prezime.</span>
           )}
         </div>
@@ -57,10 +60,11 @@ export default function Gate2Step1({ values, country, onCountryChange, onChange,
             type="email"
             value={values.email}
             onChange={(e) => onChange('email', e.target.value)}
+            onBlur={() => touch('email')}
             autoComplete="email"
             placeholder="vas@email.com"
           />
-          {touched && !emailOk && (
+          {touched.email && !emailOk && (
             <span className="field__error">Email adresa nije validna.</span>
           )}
         </div>
@@ -70,8 +74,9 @@ export default function Gate2Step1({ values, country, onCountryChange, onChange,
           onChange={(v) => onChange('phone', v)}
           country={country}
           onCountryChange={onCountryChange}
+          onBlur={() => touch('phone')}
           error={
-            touched && !phoneOk
+            touched.phone && !phoneOk
               ? 'Broj telefona nije validan za izabranu zemlju.'
               : ''
           }
