@@ -1,4 +1,8 @@
-name: Deploy to GitHub Pages
+name: Build & Deploy (gh-pages)
+
+# Na svaki push na main: build-uje app i gura SAMO izgrađene fajlove (dist/)
+# na granu gh-pages. GitHub Pages onda servira gh-pages (statički build) preko
+# "Deploy from a branch". main (izvor) se NIKAD ne servira -> nema belog ekrana.
 
 on:
   push:
@@ -6,52 +10,32 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+  contents: write
 
-# Ne prekidaj deploy koji je u toku
 concurrency:
-  group: pages
+  group: gh-pages-deploy
   cancel-in-progress: false
 
 jobs:
-  build:
+  build-deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
-      # Prebaci Pages izvor na "GitHub Actions" (build_type: workflow).
-      # Ovo gasi ugrađeni "Deploy from a branch" koji je servirao sirov /src
-      # i pravio beli ekran. configure-pages enablement NE menja već uključen
-      # branch-izvor, pa to radimo eksplicitno preko REST API-ja.
-      - name: Postavi Pages izvor na GitHub Actions
-        continue-on-error: true
-        run: |
-          curl -sS -X PUT \
-            -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
-            -H "Accept: application/vnd.github+json" \
-            -H "X-GitHub-Api-Version: 2022-11-28" \
-            "https://api.github.com/repos/${{ github.repository }}/pages" \
-            -d '{"build_type":"workflow"}'
-
-      - uses: actions/configure-pages@v5
       - uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: npm
       - run: npm ci
       - run: npm run build
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: dist
 
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - id: deployment
-        uses: actions/deploy-pages@v4
+      - name: Push build na gh-pages granu
+        run: |
+          cd dist
+          touch .nojekyll
+          git init -q
+          git checkout -q -b gh-pages
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -q -m "Deploy ${GITHUB_SHA}"
+          git push -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" gh-pages:gh-pages
