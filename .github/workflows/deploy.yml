@@ -1,8 +1,11 @@
-name: Build & Deploy (gh-pages)
+name: Build to docs (GitHub Pages)
 
-# Na svaki push na main: build-uje app i gura SAMO izgrađene fajlove (dist/)
-# na granu gh-pages. GitHub Pages onda servira gh-pages (statički build) preko
-# "Deploy from a branch". main (izvor) se NIKAD ne servira -> nema belog ekrana.
+# Na svaki push na main: build-uje app u docs/ folder i komituje ga nazad na main.
+# GitHub Pages servira "Deploy from a branch: main / docs" (statički build).
+# Sirov /src se nikad ne servira -> nema belog ekrana.
+#
+# Napomena: commit koji workflow gurne sa GITHUB_TOKEN-om NE pokreće novi workflow
+# (GitHub to namerno sprečava), pa nema beskonačne petlje.
 
 on:
   push:
@@ -13,11 +16,11 @@ permissions:
   contents: write
 
 concurrency:
-  group: gh-pages-deploy
+  group: docs-deploy
   cancel-in-progress: false
 
 jobs:
-  build-deploy:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -28,14 +31,20 @@ jobs:
       - run: npm ci
       - run: npm run build
 
-      - name: Push build na gh-pages granu
+      - name: Osveži docs/ iz build-a
         run: |
-          cd dist
-          touch .nojekyll
-          git init -q
-          git checkout -q -b gh-pages
+          rm -rf docs
+          mv dist docs
+          touch docs/.nojekyll
+
+      - name: Komituj docs/ ako ima promena
+        run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add -A
-          git commit -q -m "Deploy ${GITHUB_SHA}"
-          git push -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" gh-pages:gh-pages
+          git add docs
+          if git diff --staged --quiet; then
+            echo "Nema promena u docs/ - preskačem commit."
+          else
+            git commit -m "Build docs [skip ci]"
+            git push
+          fi
