@@ -10,7 +10,7 @@ permissions:
   pages: write
   id-token: write
 
-# Jedan deploy u datom trenutku; ne prekidaj deploy koji je u toku
+# Ne prekidaj deploy koji je u toku
 concurrency:
   group: pages
   cancel-in-progress: false
@@ -20,11 +20,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      # Programski uključi Pages i postavi izvor na "GitHub Actions"
-      # (gasi ugrađeni "Deploy from a branch" koji je servirao sirov /src i pravio beli ekran)
+
+      # Prebaci Pages izvor na "GitHub Actions" (build_type: workflow).
+      # Ovo gasi ugrađeni "Deploy from a branch" koji je servirao sirov /src
+      # i pravio beli ekran. configure-pages enablement NE menja već uključen
+      # branch-izvor, pa to radimo eksplicitno preko REST API-ja.
+      - name: Postavi Pages izvor na GitHub Actions
+        continue-on-error: true
+        run: |
+          curl -sS -X PUT \
+            -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            "https://api.github.com/repos/${{ github.repository }}/pages" \
+            -d '{"build_type":"workflow"}'
+
       - uses: actions/configure-pages@v5
-        with:
-          enablement: true
       - uses: actions/setup-node@v4
         with:
           node-version: 20
