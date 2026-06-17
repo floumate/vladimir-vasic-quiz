@@ -23,8 +23,7 @@ export const ZONES = [
     max: 100,
     name: 'Zdrava osnova',
     color: 'var(--zone-green)',
-    reading:
-      'Vaša firma je u zdravoj osnovi. Razgovor ima smisla samo ako pomišljate na sledeću etapu.',
+    reading: 'Firma stoji solidno. Pitanje je samo da li je sledeća etapa rasta.',
   },
   {
     id: 'yellow',
@@ -94,7 +93,10 @@ export const MAX_PROBLEMS = 4
  * Uslovi se evaluiraju po prioritetu ODOZGO - vraća se PRVA koja matchuje.
  * Ako nijedna ne matchuje, prikazuje se samo zone-tekst (vidi scoring.js).
  *
- * Redosled i copy su 1:1 sa tabelom 5.2 iz dokumenta.
+ * Copy je 1:1 sa tabelom 5.2. Redosled: prvo KOMBINOVANI uslovi, pa pojedinačni -
+ * jer „prva koja matchuje pobeđuje", a kombinovani (npr. Q1<=1 i Q4<=1) bi inače
+ * bili nedostižni iza pojedinačnog (Q4<=1). Tako Q1<=1 i Q4<=1 daje „dva problema",
+ * a samo Q4<=1 daje bankability rečenicu.
  * `s` su sirovi bodovi po pitanju: { q1..q6 } (0-3 svaki).
  */
 export const PERSONALIZATION_RULES = [
@@ -111,6 +113,12 @@ export const PERSONALIZATION_RULES = [
       'Ne vodite firmu - firma vodi vas. Brojevi vam stižu sa zakašnjenjem, odluke donosite naslepo.',
   },
   {
+    id: 'cash_and_bank',
+    test: (s) => s.q1 <= 1 && s.q4 <= 1,
+    sentence:
+      'Imate dva problema koja se gledaju kao jedan: nemate dovoljno keša i nemate kome da se obratite.',
+  },
+  {
     id: 'maturity',
     test: (s) => s.q3 <= 1,
     sentence:
@@ -121,12 +129,6 @@ export const PERSONALIZATION_RULES = [
     test: (s) => s.q4 <= 1,
     sentence:
       'Banka vas trenutno ne vidi kao klijenta kome bi dala kredit. To je sistemski problem, ne lični.',
-  },
-  {
-    id: 'cash_and_bank',
-    test: (s) => s.q1 <= 1 && s.q4 <= 1,
-    sentence:
-      'Imate dva problema koja se gledaju kao jedan: nemate dovoljno keša i nemate kome da se obratite.',
   },
   {
     id: 'healthy',

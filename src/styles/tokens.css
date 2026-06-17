@@ -21,10 +21,10 @@
   --line: #e3decf; /* linije, ivice */
 
   /* --- Zone score-a (sistemske boje) --- */
-  --zone-green: #2e7d4f; /* 80–100 - Zdrava osnova */
-  --zone-yellow: #b8860b; /* 60–79 - Sivo polje */
-  --zone-orange: #c2700e; /* 40–59 - Visok rizik */
-  --zone-red: #b23a2e; /* 0–39 - Kritična zona */
+  --zone-green: #2e7d4f; /* 80-100 - Zdrava osnova */
+  --zone-yellow: #b8860b; /* 60-79 - Sivo polje */
+  --zone-orange: #c2700e; /* 40-59 - Visok rizik */
+  --zone-red: #b23a2e; /* 0-39 - Kritična zona */
 
   /* --- Tipografija --- */
   --font-display: 'Plus Jakarta Sans', system-ui, sans-serif;

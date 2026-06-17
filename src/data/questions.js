@@ -1,6 +1,6 @@
 /*
- * Kviz pitanja Q1–Q7 (SF1 Framework, Sekcija 3)
- * Q1–Q6 boduju 0–3. Q7 je opciono free-text i NE boduje se.
+ * Kviz pitanja Q1-Q7 (SF1 Framework, Sekcija 3)
+ * Q1-Q6 boduju 0-3. Q7 je opciono free-text i NE boduje se.
  * Redosled odgovora je iz dokumenta (najslabiji → najjači).
  *
  * Dimenzije (Sekcija 4):
@@ -20,7 +20,7 @@ export const QUESTIONS = [
     options: [
       { label: 'Skoro svaki mesec', value: 0 },
       { label: '4+ puta godišnje', value: 1 },
-      { label: '1–3 puta godišnje', value: 2 },
+      { label: '1-3 puta godišnje', value: 2 },
       { label: 'Skoro nikad', value: 3 },
     ],
   },
@@ -71,8 +71,8 @@ export const QUESTIONS = [
     text: 'Koliko u proseku čekate da vam kupci plate fakturu?',
     options: [
       { label: 'Više od 60 dana', value: 0 },
-      { label: '30–60 dana', value: 1 },
-      { label: '15–30 dana', value: 2 },
+      { label: '30-60 dana', value: 1 },
+      { label: '15-30 dana', value: 2 },
       { label: 'Plaćanje unapred ili do 15 dana', value: 3 },
     ],
   },
@@ -103,5 +103,5 @@ export const Q7 = {
   optional: true,
 }
 
-export const SCORING_QUESTIONS = QUESTIONS // Q1–Q6 (sve nose bodove)
+export const SCORING_QUESTIONS = QUESTIONS // Q1-Q6 (sve nose bodove)
 export const MAX_RAW_SCORE = 18 // 6 pitanja × 3

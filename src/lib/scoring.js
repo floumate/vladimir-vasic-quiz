@@ -13,7 +13,7 @@ import {
 
 /**
  * Glavni izračun.
- * @param {Object} answers - { q1..q6: number 0–3 }
+ * @param {Object} answers - { q1..q6: number 0-3 }
  * @returns kompletan rezultat za score ekran + payload za čuvanje
  */
 export function computeResult(answers) {
