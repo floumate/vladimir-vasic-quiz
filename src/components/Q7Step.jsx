@@ -27,13 +27,11 @@ export default function Q7Step({ value, onSubmit, onBack }) {
           onChange={(e) => setText(e.target.value)}
           rows={4}
         />
-        <span className="field__hint">
-          {isEmpty
-            ? 'Opciono. Pomaže Vladimiru da pripremi konkretniji odgovor.'
-            : reachedMin
-              ? 'Pomaže Vladimiru da pripremi konkretniji odgovor.'
-              : `Još malo - minimum ${Q7.minLength} karaktera.`}
-        </span>
+        {!isEmpty && !reachedMin && (
+          <span className="field__hint">
+            Još malo - minimum {Q7.minLength} karaktera.
+          </span>
+        )}
       </div>
 
       <div className="mt-24">

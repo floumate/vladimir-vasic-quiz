@@ -97,7 +97,7 @@ export const Q7 = {
   number: 7,
   eyebrow: 'Opciono',
   text: 'Koji je vaš najveći finansijski stres ili pitanje u firmi trenutno?',
-  placeholder: 'Npr. ne znam gde mi tačno odlazi novac svaki mesec…',
+  placeholder: 'Unesite odgovor...',
   minLength: 20,
   maxLength: 300,
   optional: true,
