@@ -1,0 +1,522 @@
+/* Stilovi specifični za komponente kviza */
+
+/* --- Intro --- */
+.intro__star {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 8px;
+}
+.intro__lead {
+  color: rgba(21, 32, 30, 0.72);
+  font-size: 1.08rem;
+  max-width: 520px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* --- Progress --- */
+.progress {
+  margin-bottom: 16px;
+}
+.progress__meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 8px;
+}
+.progress__track {
+  height: 6px;
+  background: var(--line);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.progress__fill {
+  height: 100%;
+  background: var(--petrol);
+  border-radius: 999px;
+  transition: width 0.35s ease;
+}
+
+/* --- Opcije odgovora --- */
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.option {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  text-align: left;
+  font-family: var(--font-body);
+  font-size: 1.02rem;
+  color: var(--ink);
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease, transform 0.05s ease;
+}
+.option:hover {
+  border-color: var(--gold);
+  background: var(--cream-card);
+}
+.option:active {
+  transform: translateY(1px);
+}
+.option--selected {
+  border-color: var(--petrol);
+  background: var(--cream-card);
+  box-shadow: 0 0 0 2px rgba(16, 58, 58, 0.12);
+}
+.option__radio {
+  flex: 0 0 auto;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid var(--line);
+  transition: border-color 0.15s ease;
+  position: relative;
+}
+.option--selected .option__radio {
+  border-color: var(--zone-green);
+}
+/* Checked kružić se popuni zelenom bojom (do ivice) */
+.option--selected .option__radio::after {
+  content: '';
+  position: absolute;
+  inset: 2px;
+  border-radius: 50%;
+  background: var(--zone-green);
+  animation: radioFill 0.18s ease both;
+}
+@keyframes radioFill {
+  from {
+    transform: scale(0.2);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+.option__label {
+  flex: 1;
+}
+
+/* --- Q7 / form meta --- */
+.field__meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+}
+.row-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.row-actions__right {
+  display: flex;
+  gap: 10px;
+}
+
+/* --- Score ekran --- */
+.score-screen__top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.score-circle {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  margin: 8px 0;
+}
+.score-circle__center {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+.score-circle__num {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 3.4rem;
+  letter-spacing: -0.03em;
+}
+.score-circle__max {
+  font-size: 0.95rem;
+  color: rgba(21, 32, 30, 0.5);
+  margin-top: 2px;
+}
+.score-screen__zone {
+  margin-top: 4px;
+}
+
+.score-screen__section {
+  margin-top: 28px;
+}
+.score-screen__reading {
+  margin-top: 24px;
+  color: rgba(21, 32, 30, 0.78);
+  font-size: 1.04rem;
+  line-height: 1.6;
+}
+
+/* Razdvajači između blokova */
+.score-screen__section,
+.problems,
+.score-screen__personal,
+.vsl,
+.score-screen__cta {
+  border-top: 1px solid var(--line);
+  padding-top: 24px;
+  margin-top: 24px;
+}
+.score-screen__top + .score-screen__section {
+  border-top: none;
+}
+
+/* --- Trake dimenzija --- */
+.bars {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.bar__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 6px;
+}
+.bar__label {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+.bar__pct {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.92rem;
+  color: var(--petrol);
+}
+.bar__track {
+  position: relative;
+  height: 10px;
+  background: var(--line);
+  border-radius: 999px;
+  overflow: hidden;
+}
+/*
+ * Gradijent je sidren preko CELOG track-a (crvena -> narandžasta -> žuta -> zelena).
+ * Maska sa desne strane prekriva nepopunjeni deo, pa popunjeni odsečak progresivno
+ * pokazuje boju koja odgovara vrednosti: 0% crvena ... 100% zelena.
+ */
+.bar__gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    var(--zone-red) 0%,
+    var(--zone-orange) 33%,
+    var(--zone-yellow) 60%,
+    var(--zone-green) 100%
+  );
+}
+.bar__mask {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  background: var(--line);
+  transition: width 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* --- Problemi --- */
+.problems__heading {
+  margin-bottom: 16px;
+}
+.problems__list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.problem {
+  display: flex;
+  gap: 14px;
+  background: var(--cream);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+}
+.problem__mark {
+  flex: 0 0 auto;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--zone-orange);
+  margin-top: 8px;
+}
+.problem__title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.02rem;
+  color: var(--petrol);
+  margin: 0 0 4px;
+}
+.problem__body {
+  font-size: 0.96rem;
+  color: rgba(21, 32, 30, 0.72);
+  line-height: 1.55;
+}
+
+/* --- Personalizovana rečenica --- */
+.score-screen__personal {
+  font-style: italic;
+  font-size: 1.1rem;
+  color: var(--petrol);
+  line-height: 1.55;
+  padding-left: 16px;
+  border-left: 3px solid var(--gold);
+}
+
+/* --- VSL placeholder --- */
+.vsl {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: var(--petrol);
+  border-radius: var(--radius);
+  padding: 40px 20px;
+  text-align: center;
+}
+.vsl__play {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--gold);
+  color: var(--petrol-deep);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  padding-left: 4px;
+}
+.vsl__caption {
+  color: var(--cream);
+  font-family: var(--font-display);
+  font-weight: 700;
+}
+.vsl__note {
+  color: rgba(244, 241, 234, 0.55);
+  font-size: 0.8rem;
+}
+
+/* --- CTA blok --- */
+.score-screen__cta-copy {
+  color: rgba(21, 32, 30, 0.8);
+  font-size: 1.02rem;
+  line-height: 1.6;
+  margin-bottom: 18px;
+}
+
+/* --- Gate 2: PIB note --- */
+.pib-note {
+  background: var(--cream);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--gold);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  font-size: 0.92rem;
+  color: rgba(21, 32, 30, 0.75);
+  line-height: 1.55;
+  margin-bottom: 18px;
+}
+
+/* =========================================================
+   PHONE FIELD - country picker + input (Vladimir brend)
+   ========================================================= */
+.phone-row {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.phone-row:focus-within {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(194, 163, 107, 0.18);
+}
+.phone-row--error {
+  border-color: var(--zone-red);
+}
+
+.country-trigger {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 0 10px 0 12px;
+  background: transparent;
+  border: none;
+  border-right: 1px solid var(--line);
+  border-radius: var(--radius) 0 0 var(--radius);
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--ink);
+  transition: background 0.15s ease;
+}
+.country-trigger:hover {
+  background: rgba(16, 58, 58, 0.04);
+}
+
+.country-flag {
+  display: inline-block;
+  width: 24px;
+  height: 18px;
+  border-radius: 3px;
+  overflow: hidden;
+  flex-shrink: 0;
+  background-color: #e5e7eb;
+}
+.country-flag .fi {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  display: block;
+}
+.country-dial {
+  font-weight: 600;
+  font-size: 0.92rem;
+  color: var(--ink);
+}
+.country-chevron {
+  width: 10px;
+  height: 6px;
+  color: rgba(21, 32, 30, 0.5);
+}
+
+.phone-input {
+  flex: 1;
+  min-width: 0;
+  background: transparent;
+  border: none;
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 12px 14px;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--ink);
+}
+.phone-input:focus {
+  outline: none;
+}
+
+/* Dropdown */
+.dropdown {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  width: 320px;
+  max-width: 100%;
+  max-height: 320px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.dropdown-search {
+  padding: 10px;
+  border-bottom: 1px solid var(--line);
+}
+.dropdown-search input {
+  width: 100%;
+  padding: 9px 12px;
+  font-size: 0.92rem;
+  font-family: var(--font-body);
+  color: var(--ink);
+  background: var(--cream);
+  border: 1px solid transparent;
+  border-radius: 8px;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+.dropdown-search input:focus {
+  outline: none;
+  background: #fff;
+  border-color: var(--gold);
+}
+.dropdown-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 6px 0;
+}
+.country-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 10px 14px;
+  background: transparent;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  color: var(--ink);
+  transition: background 0.1s ease;
+}
+.country-item:hover {
+  background: var(--cream);
+}
+.country-item.selected {
+  background: rgba(194, 163, 107, 0.16);
+  color: var(--petrol);
+  font-weight: 600;
+}
+.country-item-flag {
+  width: 24px;
+  height: 18px;
+  border-radius: 3px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.country-item-flag .fi {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  display: block;
+}
+.country-item-name {
+  flex: 1;
+}
+.country-item-dial {
+  color: rgba(21, 32, 30, 0.55);
+  font-weight: 500;
+}
+.country-item.selected .country-item-dial {
+  color: var(--gold-deep);
+}
+.dropdown-empty {
+  padding: 20px;
+  text-align: center;
+  color: rgba(21, 32, 30, 0.5);
+  font-size: 0.92rem;
+}

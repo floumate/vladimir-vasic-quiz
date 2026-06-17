@@ -1,0 +1,349 @@
+@import './tokens.css';
+@import './components.css';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--ink);
+  background: var(--cream);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Landing/kviz je uvek svetao (brand pravilo) */
+#root {
+  min-height: 100vh;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  color: var(--petrol);
+  margin: 0;
+  line-height: 1.15;
+}
+
+h1 {
+  font-weight: 800;
+  font-size: 2.4rem;
+  letter-spacing: -0.03em;
+}
+
+h2 {
+  font-weight: 800;
+  font-size: 1.8rem;
+  letter-spacing: -0.02em;
+}
+
+h3 {
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  color: var(--petrol);
+}
+
+/* Eyebrow - Inter 700 CAPS, široki letter-spacing */
+.eyebrow {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.74rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold-deep);
+}
+
+.muted {
+  color: rgba(21, 32, 30, 0.6);
+  font-size: 0.9rem;
+}
+
+/* --- App shell --- */
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app__main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 32px 20px 64px;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--container);
+}
+
+/* --- Brand header --- */
+.brand {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 24px 20px 8px;
+  max-width: var(--container);
+  margin: 0 auto;
+  width: 100%;
+}
+
+.brand__logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.brand__name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--petrol);
+  letter-spacing: -0.01em;
+}
+
+/* Kvadratno back dugme, samo strelica, levo od logoa */
+.back-btn {
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--cream-card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  color: var(--petrol);
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease, transform 0.05s ease;
+}
+.back-btn:hover {
+  border-color: var(--petrol);
+  background: #fff;
+}
+.back-btn:active {
+  transform: translateY(-50%) scale(0.96);
+}
+.back-btn svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* --- Card --- */
+.card {
+  background: var(--cream-card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: 36px;
+}
+
+@media (max-width: 560px) {
+  .card {
+    padding: 24px 20px;
+  }
+  h1 {
+    font-size: 1.9rem;
+  }
+  h2 {
+    font-size: 1.5rem;
+  }
+}
+
+/* --- Buttons --- */
+.btn {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1rem;
+  border-radius: var(--radius);
+  border: 1px solid transparent;
+  padding: 14px 24px;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, transform 0.05s ease,
+    color 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-decoration: none;
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* Primarno - petrol */
+.btn--primary {
+  background: var(--petrol);
+  color: var(--cream);
+}
+.btn--primary:not(:disabled):hover {
+  background: var(--petrol-deep);
+}
+
+/* Zlatno - istaknuti CTA (jedno po ekranu) */
+.btn--gold {
+  background: var(--gold);
+  color: var(--petrol-deep);
+}
+.btn--gold:not(:disabled):hover {
+  background: var(--gold-deep);
+  color: var(--cream);
+}
+
+/* Ghost - sekundarno */
+.btn--ghost {
+  background: transparent;
+  color: var(--petrol);
+  border-color: var(--line);
+}
+.btn--ghost:not(:disabled):hover {
+  border-color: var(--petrol);
+}
+
+.btn--block {
+  width: 100%;
+}
+
+.btn--lg {
+  padding: 16px 28px;
+  font-size: 1.05rem;
+}
+
+/* --- Form fields --- */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 18px;
+}
+
+.field__label {
+  font-weight: 600;
+  font-size: 0.92rem;
+  color: var(--ink);
+}
+
+.field__hint {
+  font-size: 0.8rem;
+  color: rgba(21, 32, 30, 0.55);
+}
+
+.field__required {
+  color: var(--zone-red);
+}
+
+.input,
+.select,
+.textarea {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--ink);
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 12px 14px;
+  width: 100%;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.input:focus,
+.select:focus,
+.textarea:focus {
+  outline: none;
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(194, 163, 107, 0.18);
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 96px;
+}
+
+.field__error {
+  font-size: 0.8rem;
+  color: var(--zone-red);
+  font-weight: 500;
+}
+
+/* --- Footer --- */
+.footer {
+  text-align: center;
+  padding: 24px 20px 32px;
+  font-size: 0.8rem;
+  color: rgba(21, 32, 30, 0.5);
+}
+
+/* --- Utility --- */
+.stack {
+  display: flex;
+  flex-direction: column;
+}
+.gap-8 {
+  gap: 8px;
+}
+.gap-16 {
+  gap: 16px;
+}
+.gap-24 {
+  gap: 24px;
+}
+.text-center {
+  text-align: center;
+}
+.mt-8 {
+  margin-top: 8px;
+}
+.mt-16 {
+  margin-top: 16px;
+}
+.mt-24 {
+  margin-top: 24px;
+}
+.mt-32 {
+  margin-top: 32px;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeInUp 0.35s ease both;
+}
