@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { EMAIL_GATE } from '../data/content'
 import { isValidEmail, isValidName } from '../lib/validation'
+import BackButton from './BackButton'
 
 /*
  * Email gate (Sekcija 2, korak 3): ime + email. Back je u header-u.
@@ -8,7 +9,7 @@ import { isValidEmail, isValidName } from '../lib/validation'
  * Greška se prikazuje čim korisnik napusti polje (blur), a nestaje čim
  * unese ispravnu vrednost.
  */
-export default function EmailGate({ initial, onSubmit }) {
+export default function EmailGate({ initial, onSubmit, onBack }) {
   const [name, setName] = useState(initial?.name || '')
   const [email, setEmail] = useState(initial?.email || '')
   const [touched, setTouched] = useState({ name: false, email: false })
@@ -28,6 +29,7 @@ export default function EmailGate({ initial, onSubmit }) {
 
   return (
     <form className="card fade-in" onSubmit={handleSubmit} noValidate>
+      <BackButton onBack={onBack} />
       <h2>{EMAIL_GATE.title}</h2>
       <p className="mt-8" style={{ color: 'rgba(21,32,30,0.7)' }}>
         {EMAIL_GATE.subtitle}

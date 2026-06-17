@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import BackButton from './BackButton'
 
 /*
  * Gate 2 - korak 2/2: Naziv firme, PIB/matični (sa framing copy-jem),
@@ -20,7 +21,7 @@ const EMPLOYEE_OPTIONS = ['Samo ja', '2-5 ljudi', '6-15 ljudi', '16+ ljudi']
 const PIB_COPY =
   'Pre poziva želim da pripremim vašu firmu profesionalno. Sa PIB-om ili matičnim brojem mogu da pogledam zvanične podatke vaše firme - onako kako bih je pogledao da ste tražili kredit kod mene. Tako prvih 15 minuta poziva ne trošimo na osnovne stvari. Vaše podatke koristim samo u kontekstu razgovora, bez deljenja sa trećim stranama.'
 
-export default function Gate2Step2({ values, onChange, onSubmit }) {
+export default function Gate2Step2({ values, onChange, onSubmit, onBack }) {
   const [touched, setTouched] = useState({
     company: false,
     taxId: false,
@@ -47,6 +48,7 @@ export default function Gate2Step2({ values, onChange, onSubmit }) {
 
   return (
     <form className="card fade-in" onSubmit={handleSubmit} noValidate>
+      <BackButton onBack={onBack} />
       <h2>Još par podataka o firmi</h2>
 
       <div className="mt-24">

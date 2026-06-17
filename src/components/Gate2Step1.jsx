@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import PhoneField from './PhoneField'
 import { isValidEmail, isValidName, isValidPhone } from '../lib/validation'
+import BackButton from './BackButton'
 
 /*
  * Gate 2 - korak 1/2: Ime i prezime, Email, Telefon / WhatsApp.
@@ -8,7 +9,7 @@ import { isValidEmail, isValidName, isValidPhone } from '../lib/validation'
  * Greška se prikazuje na blur i nestaje čim vrednost postane ispravna.
  * Back je u header-u (vodi na score ekran).
  */
-export default function Gate2Step1({ values, country, onCountryChange, onChange, onNext }) {
+export default function Gate2Step1({ values, country, onCountryChange, onChange, onNext, onBack }) {
   const [touched, setTouched] = useState({ name: false, email: false, phone: false })
 
   const nameOk = isValidName(values.name)
@@ -27,6 +28,7 @@ export default function Gate2Step1({ values, country, onCountryChange, onChange,
 
   return (
     <form className="card fade-in" onSubmit={handleSubmit} noValidate>
+      <BackButton onBack={onBack} />
       <h2>Ostavite osnovne podatke</h2>
       <p className="mt-8" style={{ color: 'rgba(21,32,30,0.7)' }}>
         Pripremiću vašu firmu profesionalno i javljam se sa konkretnim sledećim

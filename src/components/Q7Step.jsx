@@ -1,12 +1,13 @@
 import { useState } from 'react'
 import { Q7 } from '../data/questions'
+import BackButton from './BackButton'
 
 /*
  * Q7 - opciono free-text (ne boduje se). Bez eyebrow-a.
  * Dugme se menja: prazno -> "Preskoči"; kuca <20 -> "Nastavi" (disabled);
  * >=20 karaktera -> "Nastavi" (enabled).
  */
-export default function Q7Step({ value, onSubmit }) {
+export default function Q7Step({ value, onSubmit, onBack }) {
   const [text, setText] = useState(value || '')
   const len = text.trim().length
   const isEmpty = len === 0
@@ -14,6 +15,7 @@ export default function Q7Step({ value, onSubmit }) {
 
   return (
     <div className="card fade-in">
+      <BackButton onBack={onBack} />
       <h2>{Q7.text}</h2>
 
       <div className="field mt-24">

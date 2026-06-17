@@ -28,9 +28,6 @@ function ThankYou() {
           </div>
         </div>
       </main>
-      <footer className="footer">
-        Vladimir Vasić · BBS Capital Investment Group
-      </footer>
     </div>
   )
 }

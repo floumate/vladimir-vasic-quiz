@@ -154,9 +154,11 @@ export default function App() {
     }
   }
 
+  const onBack = backHandler()
+
   return (
     <div className="app">
-      <BrandHeader onBack={backHandler()} />
+      <BrandHeader />
       <main className="app__main">
         <div className="container">
           {step === STEP.INTRO && (
@@ -170,14 +172,17 @@ export default function App() {
                 question={QUESTIONS[qIndex]}
                 value={answers[QUESTIONS[qIndex].id]}
                 onSelect={selectAnswer}
+                onBack={onBack}
               />
             </>
           )}
 
-          {step === STEP.Q7 && <Q7Step value={q7} onSubmit={handleQ7} />}
+          {step === STEP.Q7 && (
+            <Q7Step value={q7} onSubmit={handleQ7} onBack={onBack} />
+          )}
 
           {step === STEP.EMAIL && (
-            <EmailGate initial={lead} onSubmit={handleEmail} />
+            <EmailGate initial={lead} onSubmit={handleEmail} onBack={onBack} />
           )}
 
           {step === STEP.SCORE && result && (
@@ -197,6 +202,7 @@ export default function App() {
               onCountryChange={setPhoneCountry}
               onChange={setGate2Field}
               onNext={() => setGate2Step(2)}
+              onBack={onBack}
             />
           )}
 
@@ -205,13 +211,11 @@ export default function App() {
               values={gate2}
               onChange={setGate2Field}
               onSubmit={handleGate2Submit}
+              onBack={onBack}
             />
           )}
         </div>
       </main>
-      <footer className="footer">
-        Vladimir Vasić · BBS Capital Investment Group
-      </footer>
     </div>
   )
 }

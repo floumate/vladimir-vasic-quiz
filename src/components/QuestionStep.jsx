@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react'
+import BackButton from './BackButton'
 
 /*
  * Jedan ekran pitanja (Q1-Q6). Klik na odgovor prikaže checked state, pa posle
- * kratkog delay-a pređe na sledeće (da se vidi izbor). Back je u header-u.
+ * kratkog delay-a pređe na sledeće (da se vidi izbor). Back je u kartici iznad pitanja.
  */
-export default function QuestionStep({ question, value, onSelect }) {
+export default function QuestionStep({ question, value, onSelect, onBack }) {
   const [pending, setPending] = useState(null)
 
   // Resetuj pending kad se promeni pitanje
@@ -22,6 +23,7 @@ export default function QuestionStep({ question, value, onSelect }) {
 
   return (
     <div className="card fade-in" key={question.id}>
+      <BackButton onBack={onBack} />
       <h2>{question.text}</h2>
 
       <div className="options mt-24">
