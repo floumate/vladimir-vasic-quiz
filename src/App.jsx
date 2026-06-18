@@ -1,5 +1,4 @@
 import { useMemo, useState } from 'react'
-import BrandHeader from './components/BrandHeader'
 import QuizIntro from './components/QuizIntro'
 import ProgressBar from './components/ProgressBar'
 import QuestionStep from './components/QuestionStep'
@@ -158,7 +157,6 @@ export default function App() {
 
   return (
     <div className="app">
-      <BrandHeader />
       <main className="app__main">
         <div className="container">
           {step === STEP.INTRO && (

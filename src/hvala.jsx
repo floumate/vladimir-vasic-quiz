@@ -1,6 +1,5 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import BrandHeader from './components/BrandHeader'
 import Star from './components/Star'
 import './styles/global.css'
 
@@ -12,7 +11,6 @@ import './styles/global.css'
 function ThankYou() {
   return (
     <div className="app">
-      <BrandHeader />
       <main className="app__main">
         <div className="container">
           <div className="card fade-in text-center intro">
