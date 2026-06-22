@@ -5,12 +5,11 @@
  * Fire-and-forget: slanje NIKAD ne blokira UI ni redirect (framework Sekcija 1 -
  * instant score se ne sme zaglaviti). Greške se gutaju.
  *
- * Webhook URL ide preko env var VITE_MAKE_WEBHOOK_URL (repo je javan - URL ne u git).
- * Lokalno: .env.local;  Produkcija (GH Pages): repo Secret + deploy.yml prosleđuje.
+ * Webhook URL je direktno u kodu (svejedno je vidljiv u browseru kad kviz šalje).
  */
 import { QUESTIONS } from '../data/questions'
 
-const WEBHOOK_URL = import.meta.env.VITE_MAKE_WEBHOOK_URL || ''
+const WEBHOOK_URL = 'https://hook.eu1.make.com/sgrekanqqr658ny1scmc5o7y4j9kocsy'
 
 /* Vrednost odgovora (0-3) -> tekst labele, da tim u GHL-u čita reč, ne broj. */
 function answerLabel(qId, value) {
@@ -80,11 +79,6 @@ export function buildMakePayload(
 
 /* Fire-and-forget POST na Make webhook. Ne baca - greška se proguta da UI ne pukne. */
 export function sendToMake(payload) {
-  if (!WEBHOOK_URL) {
-    // eslint-disable-next-line no-console
-    console.warn('[SF1 Kviz] VITE_MAKE_WEBHOOK_URL nije postavljen - slanje preskočeno.')
-    return
-  }
   try {
     fetch(WEBHOOK_URL, {
       method: 'POST',

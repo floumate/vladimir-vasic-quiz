@@ -29,8 +29,6 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build
-        env:
-          VITE_MAKE_WEBHOOK_URL: ${{ secrets.VITE_MAKE_WEBHOOK_URL }}
 
       # 1) docs/ na main (commit gurnut sa GITHUB_TOKEN-om NE pokreće novi workflow)
       - name: Osveži docs/ na main
