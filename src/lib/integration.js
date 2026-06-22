@@ -56,14 +56,15 @@ export function buildMakePayload(
     email: email || '',
     phone: phoneE164 || '',
 
-    // Odgovori na kviz (tekst odabrane opcije)
-    q1: answerLabel('q1', answers.q1),
-    q2: answerLabel('q2', answers.q2),
-    q3: answerLabel('q3', answers.q3),
-    q4: answerLabel('q4', answers.q4),
-    q5: answerLabel('q5', answers.q5),
-    q6: answerLabel('q6', answers.q6),
-    q7: q7 || '',
+    // Odgovori na kviz (tekst odabrane opcije).
+    // Key-evi = GHL custom field key-evi -> u Make-u mapiraš isto ime na isto ime.
+    ponestaje_novca_za_obaveze: answerLabel('q1', answers.q1),
+    zna_tano_koliko_firma_zarauje: answerLabel('q2', answers.q2),
+    firma_radi_bez_vlasnika_2_nedelje: answerLabel('q3', answers.q3),
+    banka_bi_odobrila_kredit_50000: answerLabel('q4', answers.q4),
+    koliko_eka_naplatu_od_kupaca: answerLabel('q5', answers.q5),
+    prima_i_razume_meseni_izvetaj: answerLabel('q6', answers.q6),
+    najvei_finansijski_stres: q7 || '',
 
     // Izračunato (score ekran)
     score: result ? result.score100 : '',
