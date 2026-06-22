@@ -39,12 +39,20 @@ export function buildMakePayload(
   event,
   { answers, q7, result, name, email, phoneE164 = '', gate2 = null }
 ) {
+  // Puno ime -> ime (prva reč) + prezime (ostatak), za GHL First/Last Name
+  const fullName = (name || '').trim().replace(/\s+/g, ' ')
+  const sp = fullName.indexOf(' ')
+  const firstName = sp === -1 ? fullName : fullName.slice(0, sp)
+  const lastName = sp === -1 ? '' : fullName.slice(sp + 1)
+
   return {
     event,
     timestamp: new Date().toISOString(),
 
     // Kontakt (standardna GHL polja)
-    name: name || '',
+    name: fullName,
+    first_name: firstName,
+    last_name: lastName,
     email: email || '',
     phone: phoneE164 || '',
 
