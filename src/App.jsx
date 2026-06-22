@@ -10,6 +10,7 @@ import Gate2Step2 from './components/Gate2Step2'
 import { QUESTIONS } from './data/questions'
 import { computeResult } from './lib/scoring'
 import { formatPhoneForSubmit } from './lib/validation'
+import { sendToMake, buildMakePayload } from './lib/integration'
 
 /*
  * Tok (Sekcija 2, bez landing-a):
@@ -74,6 +75,16 @@ export default function App() {
     // Pre-fill Gate2 sa podacima iz email gate-a
     setGate2((g) => ({ ...g, name: data.name, email: data.email }))
     logPayload('email_gate', buildPayload({ leadData: data }))
+    // Optin tačka: lead u GHL i ako ne ide dalje (fire-and-forget)
+    sendToMake(
+      buildMakePayload('optin', {
+        answers,
+        q7,
+        result,
+        name: data.name,
+        email: data.email,
+      })
+    )
     setStep(STEP.SCORE)
   }
 
@@ -84,6 +95,18 @@ export default function App() {
   function handleGate2Submit() {
     const payload = buildPayload()
     logPayload('gate2_submit', payload)
+    // Application tačka: kompletira lead u GHL (fire-and-forget, pre redirecta)
+    sendToMake(
+      buildMakePayload('application', {
+        answers,
+        q7,
+        result,
+        name: gate2.name,
+        email: gate2.email,
+        phoneE164: formatPhoneForSubmit(gate2.phone, phoneCountry),
+        gate2,
+      })
+    )
     // Sačuvaj payload (za kasnije) i redirect na posebnu hvala stranicu
     try {
       sessionStorage.setItem('sf1_lead_payload', JSON.stringify(payload))
