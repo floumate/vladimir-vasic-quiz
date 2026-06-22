@@ -113,7 +113,9 @@ export default function App() {
     } catch (e) {
       /* noop */
     }
-    window.location.href = new URL('hvala.html', window.location.href).href
+    // Prod: čist URL /hvala (GH Pages servira .html); dev: Vite traži .html
+    const hvalaPath = import.meta.env.DEV ? 'hvala.html' : 'hvala'
+    window.location.href = new URL(hvalaPath, window.location.href).href
   }
 
   function buildPayload({ leadData = lead } = {}) {
