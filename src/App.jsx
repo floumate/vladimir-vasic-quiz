@@ -4,6 +4,7 @@ import ProgressBar from './components/ProgressBar'
 import QuestionStep from './components/QuestionStep'
 import Q7Step from './components/Q7Step'
 import EmailGate from './components/EmailGate'
+import LoadingScreen from './components/LoadingScreen'
 import ScoreScreen from './components/ScoreScreen'
 import Gate2Step1 from './components/Gate2Step1'
 import Gate2Step2 from './components/Gate2Step2'
@@ -25,6 +26,7 @@ const STEP = {
   INTRO: 'intro',
   QUESTIONS: 'questions',
   Q7: 'q7',
+  LOADING: 'loading',
   EMAIL: 'email',
   SCORE: 'score',
   GATE2: 'gate2',
@@ -52,6 +54,7 @@ export default function App() {
   const [phoneCountry, setPhoneCountry] = useState(null)
 
   const total = QUESTIONS.length
+  const quizTotal = total + 1 // Q1-Q6 + Q7 -> progres ide do 7/7
 
   const result = useMemo(() => {
     const allAnswered = QUESTIONS.every((q) => typeof answers[q.id] === 'number')
@@ -67,7 +70,7 @@ export default function App() {
 
   function handleQ7(text) {
     setQ7(text)
-    setStep(STEP.EMAIL)
+    setStep(STEP.LOADING)
   }
 
   function handleEmail(data) {
@@ -185,12 +188,12 @@ export default function App() {
       <main className="app__main">
         <div className="container">
           {step === STEP.INTRO && (
-            <QuizIntro total={total} onStart={() => setStep(STEP.QUESTIONS)} />
+            <QuizIntro total={quizTotal} onStart={() => setStep(STEP.QUESTIONS)} />
           )}
 
           {step === STEP.QUESTIONS && (
             <>
-              <ProgressBar current={qIndex + 1} total={total} />
+              <ProgressBar current={qIndex + 1} total={quizTotal} />
               <QuestionStep
                 question={QUESTIONS[qIndex]}
                 value={answers[QUESTIONS[qIndex].id]}
@@ -201,7 +204,14 @@ export default function App() {
           )}
 
           {step === STEP.Q7 && (
-            <Q7Step value={q7} onSubmit={handleQ7} onBack={onBack} />
+            <>
+              <ProgressBar current={quizTotal} total={quizTotal} />
+              <Q7Step value={q7} onSubmit={handleQ7} onBack={onBack} />
+            </>
+          )}
+
+          {step === STEP.LOADING && (
+            <LoadingScreen onDone={() => setStep(STEP.EMAIL)} />
           )}
 
           {step === STEP.EMAIL && (
