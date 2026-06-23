@@ -19,7 +19,7 @@ const REVENUE_OPTIONS = [
 const EMPLOYEE_OPTIONS = ['Samo ja', '2-5 ljudi', '6-15 ljudi', '16+ ljudi']
 
 const PIB_COPY =
-  'Pre poziva želim da pripremim vašu firmu profesionalno. Sa PIB-om ili matičnim brojem mogu da pogledam zvanične podatke vaše firme - onako kako bih je pogledao da ste tražili kredit kod mene. Tako prvih 15 minuta poziva ne trošimo na osnovne stvari. Vaše podatke koristim samo u kontekstu razgovora, bez deljenja sa trećim stranama.'
+  'Pre poziva želim da pripremim Vašu firmu profesionalno. Sa PIB-om ili matičnim brojem mogu da pogledam zvanične podatke Vaše firme - onako kako bih je pogledao da ste tražili kredit kod mene. Tako prvih 15 minuta poziva ne trošimo na osnovne stvari. Vaše podatke koristim samo u kontekstu razgovora, bez deljenja sa trećim stranama.'
 
 export default function Gate2Step2({ values, onChange, onSubmit, onBack }) {
   const [touched, setTouched] = useState({
