@@ -80,7 +80,7 @@ function CheckIcon() {
       <circle cx="10" cy="10" r="10" fill="var(--gold)" />
       <path
         d="M6 10.5 9 13l5-6"
-        stroke="var(--petrol)"
+        stroke="#fff"
         strokeWidth="2"
         fill="none"
         strokeLinecap="round"
@@ -106,7 +106,7 @@ function Landing() {
                   korporacija · osnivač BBS Capital Investment Group
                 </p>
                 <h1>Znate li gde Vaša firma gubi najviše novca?</h1>
-                <p className="intro__lead mt-16">
+                <p className="lead-text mt-16">
                   Za manje od 2 minuta dobićete jasnu sliku finansijskog zdravlja Vaše firme
                   i konkretne savete za buduće odluke.
                 </p>

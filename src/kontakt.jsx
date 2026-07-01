@@ -38,14 +38,14 @@ function ContactPage() {
       <main className="landing-main">
         <section className="landing-hero-section">
           <div className="landing-container">
-            <div className="text-center landing-narrow">
+            <div className="text-center">
               <span className="eyebrow">Kontakt</span>
               <h1 className="mt-16">Imate konkretno pitanje?</h1>
             </div>
 
             <div className="contact-grid mt-48">
               <form className="card" onSubmit={handleSubmit} noValidate>
-                <p className="intro__lead" style={{ marginBottom: 20, fontSize: '1rem' }}>
+                <p className="lead-text" style={{ marginBottom: 20, fontSize: '1rem' }}>
                   Ako Vaša situacija ima nešto specifično ili imate pitanje pre nego što
                   krenete, pišite nam direktno. Javljamo se na email koji ostavite.
                 </p>
