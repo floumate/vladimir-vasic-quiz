@@ -57,7 +57,7 @@ function Landing() {
           </section>
 
           {/* Simptomi */}
-          <section className="landing-section landing-medium">
+          <section className="landing-section">
             <div className="card">
               <span className="eyebrow">Da li vam ovo zvuči poznato?</span>
               <h2 className="mt-16">Firma radi, a opet...</h2>
@@ -92,7 +92,7 @@ function Landing() {
           </section>
 
           {/* O Vladimiru */}
-          <section className="landing-section landing-medium">
+          <section className="landing-section">
             <div className="card text-center">
               <span className="eyebrow">Ko stoji iza ovoga</span>
               <h2 className="mt-16">Vladimir Vasić - Finansijski Strateg</h2>

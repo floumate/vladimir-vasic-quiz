@@ -569,10 +569,6 @@
   max-width: 620px;
   margin: 0 auto;
 }
-.landing-medium {
-  max-width: 820px;
-  margin: 0 auto;
-}
 .landing-section {
   margin-top: 64px;
 }
@@ -592,7 +588,7 @@
   letter-spacing: -0.02em;
 }
 .landing-page h3 {
-  font-size: 1.35rem;
+  font-size: 1.45rem;
 }
 @media (max-width: 560px) {
   .landing-page h1 {
@@ -642,14 +638,14 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 44px;
-  height: 44px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
-  background: var(--petrol);
-  color: var(--gold);
+  border: 2px solid var(--petrol);
+  color: var(--petrol);
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: 1.05rem;
+  font-size: 1rem;
 }
 .step-card__body {
   color: rgba(21, 32, 30, 0.7);
