@@ -92,18 +92,16 @@ function Landing() {
           </section>
 
           {/* O Vladimiru */}
-          <section className="landing-section">
-            <div className="card text-center">
-              <span className="eyebrow">Ko stoji iza ovoga</span>
-              <h2 className="mt-16">Vladimir Vasić - Finansijski Strateg</h2>
-              <p className="intro__lead mt-16">
-                Bankar po struci, savetnik po izboru. Radim sa vlasnicima firmi na tome da
-                razumeju gde tačno stoje finansijski - pre nego što to umesto njih otkrije
-                banka, dobavljač ili tržište. Bez magle, bez žargona, bez pritiska - samo
-                brojevi i sledeći korak.
-              </p>
-              <p className="muted mt-16">BBS Capital Investment Group</p>
-            </div>
+          <section className="landing-section landing-narrow text-center">
+            <span className="eyebrow">Ko stoji iza ovoga</span>
+            <h2 className="mt-16">Vladimir Vasić - Finansijski Strateg</h2>
+            <p className="intro__lead mt-16">
+              Bankar po struci, savetnik po izboru. Radim sa vlasnicima firmi na tome da
+              razumeju gde tačno stoje finansijski - pre nego što to umesto njih otkrije
+              banka, dobavljač ili tržište. Bez magle, bez žargona, bez pritiska - samo
+              brojevi i sledeći korak.
+            </p>
+            <p className="muted mt-16">BBS Capital Investment Group</p>
           </section>
 
           {/* Final CTA */}

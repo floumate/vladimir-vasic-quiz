@@ -635,17 +635,10 @@
   padding: 28px;
 }
 .step-card__num {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  border: 2px solid var(--petrol);
-  color: var(--petrol);
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: 1rem;
+  font-size: 1.3rem;
+  color: var(--gold-deep);
 }
 .step-card__body {
   color: rgba(21, 32, 30, 0.7);
