@@ -570,11 +570,11 @@
   margin: 0 auto;
 }
 .landing-section {
-  margin-top: 64px;
+  margin-top: 104px;
 }
 @media (max-width: 560px) {
   .landing-section {
-    margin-top: 44px;
+    margin-top: 64px;
   }
 }
 
