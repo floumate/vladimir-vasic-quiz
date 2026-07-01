@@ -1,1 +1,0 @@
-import{j as r}from"./global-D79TZhGX.js";function o({size:t=22,color:i="var(--gold)"}){return r.jsx("svg",{width:t,height:t,viewBox:"0 0 100 100",fill:"none",xmlns:"http://www.w3.org/2000/svg","aria-hidden":"true",children:r.jsx("path",{d:"M50 0 C53 30 70 47 100 50 C70 53 53 70 50 100 C47 70 30 53 0 50 C30 47 47 30 50 0 Z",fill:i})})}export{o as S};
