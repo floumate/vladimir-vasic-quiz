@@ -9,10 +9,10 @@
 
 /* --- Dimenzije: metapodaci za 4 trake --- */
 export const DIMENSIONS = [
-  { key: 'cashFlow', label: 'Cash flow kontrola', max: 6 },
-  { key: 'bankability', label: 'Bankabilnost', max: 3 },
-  { key: 'systemMaturity', label: 'Sistemska zrelost', max: 3 },
-  { key: 'financialAwareness', label: 'Finansijska svest', max: 6 },
+  { key: 'cashFlow', label: 'Tok novca', max: 6 },
+  { key: 'bankability', label: 'Kreditna sposobnost', max: 3 },
+  { key: 'systemMaturity', label: 'Samostalnost firme', max: 3 },
+  { key: 'financialAwareness', label: 'Finansijska kontrola', max: 6 },
 ]
 
 /* --- Zone (na osnovu score_100) --- */
@@ -147,10 +147,11 @@ export const EMAIL_GATE = {
   cta: 'Prikaži moj rezultat',
 }
 
-/* --- CTA iznad Gate 2 (Sekcija 6) --- */
+/* --- CTA iznad Gate 2 (Sekcija 6) - copy klijenta 1:1 --- */
 export const SCORE_CTA = {
-  copy: 'Vidite gde tačno firma gubi i šta da uradite. Ostavite osnovne podatke - pripremiću vašu firmu profesionalno i javljam se sa konkretnim sledećim korakom. Bez obaveza, bez cene.',
-  button: 'Zatraži besplatnu pomoć',
+  title: 'Besplatna detaljna analiza: koliko tačno možete da poboljšate poslovanje',
+  copy: 'Ovaj rezultat je brzi presek. U njoj vidite površinske rezultate Vašeg finansijskog poslovanja. Za detaljnu sliku nam je potrebno više informacija. Popunite sledeći upitnik i naš tim potpuno besplatno radi dubinsku analizu: gde firma gubi, dajemo konkretne korake kako da poboljšate poslovanje i jasne opcije koliko profita možete da vratite u firmu. Analizu Vam dostavljamo na email u roku od 48 do 72 sata.',
+  button: 'Zatraži besplatnu analizu',
 }
 
 /* --- VSL (Sekcija 5, blok F) - placeholder --- */

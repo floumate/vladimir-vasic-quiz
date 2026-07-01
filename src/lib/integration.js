@@ -79,6 +79,7 @@ export function buildMakePayload(
 
     // Application-only (prazno na optin-u)
     company: gate2 ? gate2.company : '',
+    role: gate2 ? gate2.role : '',
     pib: gate2 ? gate2.taxId : '',
     revenue: gate2 ? gate2.revenue : '',
     employees: gate2 ? gate2.employees : '',

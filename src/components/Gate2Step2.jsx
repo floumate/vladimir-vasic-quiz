@@ -18,30 +18,44 @@ const REVENUE_OPTIONS = [
 
 const EMPLOYEE_OPTIONS = ['Samo ja', '2-5 ljudi', '6-15 ljudi', '16+ ljudi']
 
+const ROLE_OPTIONS = [
+  'Vlasnik',
+  'Generalni direktor',
+  'Menadžer',
+  'Naslednik',
+  'Član odbora',
+  'Drugo',
+]
+
 const PIB_COPY =
   'Pre poziva želim da pripremim Vašu firmu profesionalno. Sa PIB-om ili matičnim brojem mogu da pogledam zvanične podatke Vaše firme - onako kako bih je pogledao da ste tražili kredit kod mene. Tako prvih 15 minuta poziva ne trošimo na osnovne stvari. Vaše podatke koristim samo u kontekstu razgovora, bez deljenja sa trećim stranama.'
 
 export default function Gate2Step2({ values, onChange, onSubmit, onBack }) {
   const [touched, setTouched] = useState({
     company: false,
+    role: false,
     taxId: false,
     revenue: false,
     employees: false,
   })
+  const [consent, setConsent] = useState(false)
+  const [consentTouched, setConsentTouched] = useState(false)
 
   const errors = {
     company: values.company.trim().length < 2,
+    role: !values.role,
     taxId: values.taxId.trim().length < 3,
     revenue: !values.revenue,
     employees: !values.employees,
   }
-  const valid = !Object.values(errors).some(Boolean)
+  const valid = !Object.values(errors).some(Boolean) && consent
   const touch = (f) => setTouched((t) => ({ ...t, [f]: true }))
   const err = (k) => touched[k] && errors[k]
 
   function handleSubmit(e) {
     e.preventDefault()
-    setTouched({ company: true, taxId: true, revenue: true, employees: true })
+    setTouched({ company: true, role: true, taxId: true, revenue: true, employees: true })
+    setConsentTouched(true)
     if (!valid) return
     onSubmit()
   }
@@ -65,6 +79,26 @@ export default function Gate2Step2({ values, onChange, onSubmit, onBack }) {
           {err('company') && (
             <span className="field__error">Obavezno polje.</span>
           )}
+        </div>
+
+        <div className="field">
+          <label className="field__label">
+            Vaša uloga u firmi <span className="field__required">*</span>
+          </label>
+          <select
+            className="select"
+            value={values.role}
+            onChange={(e) => onChange('role', e.target.value)}
+            onBlur={() => touch('role')}
+          >
+            <option value="">Izaberite…</option>
+            {ROLE_OPTIONS.map((o) => (
+              <option key={o} value={o}>
+                {o}
+              </option>
+            ))}
+          </select>
+          {err('role') && <span className="field__error">Izaberite opciju.</span>}
         </div>
 
         {/* PIB - framing copy je presudan (Sekcija 7) */}
@@ -139,6 +173,23 @@ export default function Gate2Step2({ values, onChange, onSubmit, onBack }) {
           />
         </div>
       </div>
+
+      <label className="consent">
+        <input
+          type="checkbox"
+          checked={consent}
+          onChange={(e) => setConsent(e.target.checked)}
+          onBlur={() => setConsentTouched(true)}
+        />
+        <span>
+          Saglasan/saglasna sam sa obradom mojih podataka u skladu sa{' '}
+          <a href="#privacy">Politikom privatnosti</a>, isključivo radi izrade analize moje
+          firme.
+        </span>
+      </label>
+      {consentTouched && !consent && (
+        <span className="field__error">Potrebna je saglasnost da bismo nastavili.</span>
+      )}
 
       <button type="submit" className="btn btn--gold btn--block btn--lg mt-16">
         Pošalji

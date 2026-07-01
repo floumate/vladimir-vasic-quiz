@@ -51,6 +51,7 @@ export default function ScoreScreen({ result, onRequestHelp }) {
 
       {/* G - CTA → Gate 2 */}
       <div className="score-screen__cta">
+        <h3 className="score-screen__cta-title">{SCORE_CTA.title}</h3>
         <p className="score-screen__cta-copy">{SCORE_CTA.copy}</p>
         <button
           type="button"

@@ -360,6 +360,9 @@
 }
 
 /* --- CTA blok --- */
+.score-screen__cta-title {
+  margin-bottom: 10px;
+}
 .score-screen__cta-copy {
   color: rgba(21, 32, 30, 0.8);
   font-size: 1.02rem;
@@ -599,52 +602,371 @@
   }
 }
 
-.symptom-list {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-.symptom-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  font-size: 1.02rem;
-}
-.symptom-item__dot {
-  flex-shrink: 0;
-  width: 8px;
-  height: 8px;
-  margin-top: 8px;
-  border-radius: 50%;
-  background: var(--petrol);
+.landing-main {
+  flex: 1;
 }
 
-.steps-grid {
+/* --- Sticky nav (landing + kontakt) --- */
+.landing-nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(244, 241, 234, 0.86);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+.landing-nav__inner {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 0 20px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.landing-nav__brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.05rem;
+  color: var(--petrol);
+  text-decoration: none;
+}
+.btn--sm {
+  padding: 10px 18px;
+  font-size: 0.9rem;
+}
+
+/* --- Hero (2 kolone + vizuelna kartica) --- */
+.landing-hero-section {
+  padding: 64px 0 40px;
+}
+.hero-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 48px;
+  align-items: center;
   text-align: left;
 }
-.step-card {
+.credline {
+  font-size: 0.9rem;
+  color: rgba(21, 32, 30, 0.65);
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--line);
+  max-width: 560px;
+}
+.credline b {
+  color: var(--petrol);
+}
+.trust-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin-top: 22px;
+}
+.trust-row__item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  color: rgba(21, 32, 30, 0.65);
+}
+.trust-row__item svg {
+  flex-shrink: 0;
+}
+
+.hero-visual {
+  position: relative;
+  background: linear-gradient(160deg, var(--petrol), var(--petrol-deep));
+  border-radius: var(--radius-lg);
+  padding: 38px;
+  color: var(--cream);
+  overflow: hidden;
+  min-height: 320px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.hero-visual__star {
+  position: absolute;
+  top: -30px;
+  right: -30px;
+}
+.hero-visual__label {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 10px;
+}
+.hero-visual__num {
+  font-family: var(--font-display);
+  font-size: 3.2rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+.hero-visual__sub {
+  color: rgba(244, 241, 234, 0.75);
+  margin-top: 8px;
+  font-size: 0.92rem;
+}
+.hero-visual__bars {
+  display: flex;
+  gap: 8px;
+  align-items: flex-end;
+  height: 80px;
+  margin-top: 22px;
+}
+.hero-visual__bars span {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.16);
+  border-radius: 5px 5px 0 0;
+}
+.hero-visual__bars span:nth-child(1) {
+  height: 36%;
+}
+.hero-visual__bars span:nth-child(2) {
+  height: 54%;
+}
+.hero-visual__bars span:nth-child(3) {
+  height: 72%;
+}
+.hero-visual__bars span:nth-child(4) {
+  height: 100%;
+  background: var(--gold);
+}
+@media (max-width: 880px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* --- Bio kartica (tamna, "pattern interrupt" - autoritet) --- */
+.bio-card {
+  background: var(--petrol);
+  color: var(--cream);
+  border-radius: 24px;
+  padding: 48px;
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 40px;
+  align-items: center;
+}
+.bio-card h2 {
+  color: var(--cream);
+}
+.bio-card .eyebrow {
+  color: var(--gold);
+}
+.bio-card__p {
+  color: rgba(244, 241, 234, 0.82);
+  line-height: 1.65;
+}
+.bio-card__photo {
+  aspect-ratio: 4 / 5;
+  border-radius: 18px;
+  background: linear-gradient(160deg, var(--petrol-soft), var(--petrol-deep));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(244, 241, 234, 0.5);
+  font-size: 0.82rem;
+  text-align: center;
+  padding: 20px;
+  line-height: 1.5;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+@media (max-width: 880px) {
+  .bio-card {
+    grid-template-columns: 1fr;
+    padding: 32px;
+  }
+  .bio-card__photo {
+    max-width: 240px;
+    margin: 0 auto;
+  }
+}
+
+/* --- Šta dobijate: value kartice --- */
+.sec-head {
+  max-width: 640px;
+}
+.value-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.value-card {
   background: var(--cream-card);
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
-  padding: 28px;
+  padding: 26px;
 }
-.step-card__num {
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: 1.3rem;
-  color: var(--gold-deep);
+.value-card__icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  background: var(--petrol);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
 }
-.step-card__body {
+.value-card__icon svg {
+  width: 22px;
+  height: 22px;
+}
+.value-card p {
   color: rgba(21, 32, 30, 0.7);
+  font-size: 0.95rem;
+  margin-top: 8px;
 }
 @media (max-width: 720px) {
-  .steps-grid {
+  .value-cards {
     grid-template-columns: 1fr;
   }
+}
+
+/* --- FAQ (native details/summary) --- */
+.faq-head {
+  margin: 0 auto 34px;
+}
+.faq {
+  max-width: 760px;
+  margin: 0 auto;
+}
+.faq-item {
+  border-bottom: 1px solid var(--line);
+}
+.faq-item summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 20px 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--petrol);
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  font-size: 1.02rem;
+}
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+.faq-item summary .faq-plus {
+  color: var(--gold-deep);
+  font-weight: 800;
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+}
+.faq-item[open] summary .faq-plus {
+  transform: rotate(45deg);
+}
+.faq-item p {
+  padding: 0 0 20px;
+  color: rgba(21, 32, 30, 0.7);
+}
+
+/* --- Taman footer (landing + kontakt) --- */
+.site-footer {
+  background: var(--petrol-deep);
+  color: rgba(244, 241, 234, 0.7);
+  padding: 40px 0;
+  font-size: 0.85rem;
+}
+.site-footer__inner {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.site-footer__brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--cream);
+  font-family: var(--font-display);
+  font-weight: 800;
+}
+.site-footer__links a {
+  color: var(--cream);
+  text-decoration: none;
+  opacity: 0.85;
+}
+.site-footer__links a:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+.site-footer__impressum {
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(244, 241, 234, 0.15);
+  font-size: 0.78rem;
+  color: rgba(244, 241, 234, 0.55);
+  line-height: 1.6;
+}
+
+/* --- Kontakt stranica --- */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1.3fr 0.7fr;
+  gap: 40px;
+  align-items: start;
+}
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding-top: 8px;
+}
+.ci-block__label {
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold-deep);
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+.ci-block__val {
+  font-size: 0.98rem;
+  color: var(--ink);
+}
+.ci-block__val--muted {
+  color: rgba(21, 32, 30, 0.6);
+  font-size: 0.9rem;
+}
+@media (max-width: 760px) {
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+}
+
+/* --- Consent checkbox (Gate2 + kontakt forma) --- */
+.consent {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  margin: 16px 0 4px;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: rgba(21, 32, 30, 0.65);
+}
+.consent input {
+  margin-top: 3px;
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  accent-color: var(--gold);
+}
+.consent a {
+  color: var(--gold-deep);
+  text-decoration: underline;
 }

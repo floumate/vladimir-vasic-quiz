@@ -15,6 +15,7 @@ export default defineConfig({
         main: 'index.html',
         hvala: 'hvala.html',
         pocetna: 'pocetna.html',
+        kontakt: 'kontakt.html',
       },
     },
   },
