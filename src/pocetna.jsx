@@ -227,7 +227,7 @@ function Landing() {
           </div>
         </section>
       </main>
-      <SiteFooter />
+      <SiteFooter page="landing" />
     </div>
   )
 }

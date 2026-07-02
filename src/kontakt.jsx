@@ -140,7 +140,7 @@ function ContactPage() {
           </div>
         </section>
       </main>
-      <SiteFooter />
+      <SiteFooter page="kontakt" />
     </div>
   )
 }

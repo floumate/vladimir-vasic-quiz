@@ -12,14 +12,9 @@ export default function SiteNav() {
           <Star size={22} />
           Vladimir Vasić
         </a>
-        <div className="landing-nav__actions">
-          <a href="kontakt.html" className="landing-nav__link">
-            Kontakt
-          </a>
-          <a href="./" className="btn btn--gold btn--sm">
-            Započni analizu
-          </a>
-        </div>
+        <a href="./" className="btn btn--gold btn--sm">
+          Započni analizu
+        </a>
       </div>
     </nav>
   )
